@@ -2,7 +2,7 @@ const mongoose = require('mongoose'),
  validator = require('validator'),
  bcrypt = require('bcryptjs'),
  jwt = require('jsonwebtoken')
- 
+
 const Schema = mongoose.Schema
 
 const WriterSchema = new Schema ({
@@ -46,6 +46,14 @@ const WriterSchema = new Schema ({
             ref: 'Conversation',
             unique: true
           }
+      ],
+      tokens: [
+        {
+          token: {
+            type: String,
+            required: true
+          }
+        }
       ]
 }, { timestamps: true })
 
@@ -72,6 +80,14 @@ WriterSchema.methods.generateAuthToken = async function () {
     return token;
 };
 
+WriterSchema.statics.findByCredentials = async (email, password) => {
+  const user = await Writer.findOne({ email });
+  if (!user) throw new Error('Writer not found');
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) throw new Error('Invalid password, try again.');
+  return user;
+};
+
 WriterSchema.pre('save', async function (next) {
     const writer = this;
     if (writer.isModified('password')) {
@@ -80,4 +96,6 @@ WriterSchema.pre('save', async function (next) {
     next()
   }
 )
-module.exports = mongoose.model('Writer', WriterSchema)
+
+const Writer = mongoose.model('Writer', WriterSchema)
+module.exports = Writer

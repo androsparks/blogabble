@@ -1,5 +1,6 @@
 const passport = require('passport'),
-  {JwtStrategy, ExtractJwt} = require('passport-jwt'),
+  JwtStrategy = require('passport-jwt').Strategy,
+  ExtractJwt = require('passport-jwt').ExtractJwt,
   Writer = require('../../db/models/writerModel')
 
 let jwtOptions = {

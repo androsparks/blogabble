@@ -1,4 +1,6 @@
-const app = express();
+require('./db/config');
+const express = require('express')
+const app = express(), path = require('path');
 
 app.use(express.json());
 

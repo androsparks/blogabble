@@ -35,7 +35,7 @@ exports.getSinglePost = (req, res) => {
   )
 }
 
-exports.updatePost = (req, res) => {
+exports.updatePost = async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['title', 'body'];
     const isValidOperation = updates.every((update) =>

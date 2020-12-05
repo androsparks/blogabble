@@ -4,21 +4,21 @@ const Writer = require('../db/models/writerModel')
 // WRITER CRUD FUNCTIONS BELOW 
 //***********************************************
 exports.createWriter = async (req, res) => {
-    console.log(req.body)
   Writer.create(req.body, async (err, user) => {
-    if (err) {
-      console.log(err);
-      res.status(400).json(err);
-    } else {
-      const token = await user.generateAuthToken();
-      res.cookie('jwt', token, {
-        httpOnly: true,
-        sameSite: 'Strict',
-        secure: process.env.NODE_ENV !== 'production' ? false : true
-      });
-      res.status(201).json(user);
+      if (err) {
+        console.log(err);
+        res.status(400).json(err);
+      } else {
+        const token = await user.generateAuthToken();
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          sameSite: 'Strict',
+          secure: process.env.NODE_ENV !== 'production' ? false : true
+        });
+        res.status(201).json(user);
+      }
     }
-  })
+  )
 }
 
 exports.getSingleWriter = async (req, res) => {

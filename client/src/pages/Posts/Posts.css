@@ -1,0 +1,26 @@
+/* .post-container{ */
+    /* display: grid;
+    grid-template-columns: 1em 1fr 1em;
+    grid-template: 
+    ". title ."
+    ". subtitle ."
+    ". bio ."
+    ". body ."; */
+    /* place-items: center; */
+/* } */
+
+/* .post-title{
+    grid-area: title;
+}
+
+.post-subtitle{
+    grid-area: subtitle;
+}
+
+.post-bio{
+    grid-area: bio;
+}
+
+.post-body{
+    grid-area: body;
+} */

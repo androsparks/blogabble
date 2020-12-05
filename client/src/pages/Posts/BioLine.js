@@ -1,12 +1,17 @@
 import React from 'react'
+import { Avatar, Pane, Text } from 'evergreen-ui'
 
 const BioLine = () => {
     return (
-        <div>
-            <figure className="image is-24x24">
-                <img className="is-rounded" src="https://bulma.io/images/placeholders/24x24.png"/>
-            </figure>
-        </div>
+        <Pane
+        height={30}
+        display="flex"
+        alignItems="center"
+        border="default">
+            <Avatar name="Jeroen Ransijn" size={25} marginRight={12} />
+            <Text marginRight={12} size={300} > Place Holder Name </Text>
+            <Text size={300} > Place Holder Date  </Text>
+        </Pane>
     )
 }
 

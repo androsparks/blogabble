@@ -2,7 +2,6 @@ import React from 'react'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
 import Posts from './pages/Posts/Posts'
-import './App.sass';
 
 function App() {
   return (

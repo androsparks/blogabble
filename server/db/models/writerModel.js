@@ -44,7 +44,7 @@ const WriterSchema = new Schema ({
           {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Conversation',
-            unique: true
+            // unique: true
           }
       ],
       tokens: [

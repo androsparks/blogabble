@@ -37,7 +37,7 @@ const dbReset = async () => {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       password: '12345678',
-      bio: faker.lorem.paragraph(),
+      bio: faker.lorem.sentence(),
       avatar: `https://i.pravatar.cc/300?u=${i}`
     });
     await me.generateAuthToken();

@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Pane, Avatar, Heading,Text, FilePicker, Button, EditIcon } from 'evergreen-ui'
 import './Profile.css'
+import { AppContext } from '../../context/AppContext';
 import EditProfile from './EditProfile'
 
 const MyProfile = () => {
     const [change, setChange] = useState(false)
+    const { currentUser, setCurrentUser } = useContext(AppContext);
+
     return (
         <main className="profile-container">
         <Pane

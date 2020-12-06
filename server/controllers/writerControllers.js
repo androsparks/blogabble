@@ -82,6 +82,7 @@ exports.deleteWriter = async (req, res) => {
 
 exports.loginWriter = async (req, res) => {
   const {email, password} = req.body
+  console.log("at login")
     try {
         const user = await Writer.findByCredentials(email, password);
         const token = await user.generateAuthToken();

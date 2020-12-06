@@ -8,10 +8,12 @@ import SignUp from './pages/SignUp/SignUp'
 import Home from './pages/Home/Home'
 import Profile from './pages/Profile/Profiles'
 import MyProfile from './pages/Profile/MyProfile'
+import { AppContextProvider } from './context/AppContext';
 
 function App() {
   return (
     <div className="App">
+      <AppContextProvider>
       <BrowserRouter>
       <NavigationBar />
        <Switch>
@@ -21,7 +23,6 @@ function App() {
          <Route exact path="/login" component={Login}/>
          <Route exact path="/post" component={Posts} />
          <Route exact path="/profile" component={Profile}/>
-         <Route exact path="/myprofile" component={MyProfile}/>
          <Route exact path ="/posts"/>
          {/* //eveyrone can get posts */}
          {/* post page will be the same but some PRivate route will have edit buttons, same with profiles  */}
@@ -30,9 +31,12 @@ function App() {
          {/* get all user posts with update button */}
          {/* <PrivateRoute exact path="/myposts" />  */}
           {/* update user id */}
+         <PrivateRoute exact path="/myprofile" component={MyProfile}/>
+         <PrivateRoute exact path ="/myposts"/>
          <PrivateRoute exact path="/update/:id"/>
        </Switch>
       </BrowserRouter>
+      </AppContextProvider>
     </div>
   );
 }

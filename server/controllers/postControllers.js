@@ -1,4 +1,5 @@
-const Post = require('../db/models/postModel')
+const Post = require('../db/models/postModel'),
+Writer = require('../db/models/writerModel')
 
 exports.createPost = (req, res) => {
     Post.create(req.body, (error, post) => {
@@ -14,25 +15,38 @@ exports.createPost = (req, res) => {
   )
 }
 
-exports.getAllPosts = (req, res) => {
-    Post.find().then(all => res.json(all))
+exports.getAllPosts =async (req, res) => {
+    // Post.find().then(all => res.json(all))
+    console.log("here ia m")
+    // console.log(req.headers)
+    console.log(req.cookies)
+    try {
+        await req.user
+          .populate({
+            path: 'posts'
+          })
+          .execPopulate();
+        res.status(200).json(req.user.posts);
+      } catch (error) {
+          console.log(error)
+        res.status(400).json({ error: error.message });
+      }
 }
 
-exports.getSinglePost = (req, res) => {
-    Post.findById(req.params.postId, (err, post) => {
-        if(err){
-            console.log(err)
-            res.status(400).json(err)
-        } else {
-            if(!post) {
-                res.sendStatus(410)
-            }
-            else {
-                res.status(200).json(post)
-            }
+exports.getSinglePost = async (req, res) => {
+    try {
+        let post = await Post.findById(req.params.id)
+        let writerData = await Writer.findById(post.owner)
+        const { firstName, lastName, avatar} = writerData
+        const writer = {
+            firstName,
+            lastName,
+            avatar
         }
+        res.status(200).json({post, writer})
+    } catch (error) {
+        console.log(error)
     }
-  )
 }
 
 exports.updatePost = async (req, res) => {

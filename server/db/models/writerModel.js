@@ -40,13 +40,15 @@ const WriterSchema = new Schema ({
           }
         }
       },
-      posts: [
-          {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Conversation',
-            // unique: true
-          }
-      ],
+      bio: String,
+      avatar: String,
+      // posts: [
+      //     {
+      //       type: mongoose.Schema.Types.ObjectId,
+      //       ref: 'Conversation',
+      //       // unique: true
+      //     }
+      // ],
       tokens: [
         {
           token: {
@@ -57,7 +59,15 @@ const WriterSchema = new Schema ({
       ]
 }, { timestamps: true })
 
+//fake path posts
+WriterSchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'owner'
+});
+
 WriterSchema.methods.toJSON = function () {
+  console.log("activated")
     const writer = this;
     const writerObject = writer.toObject();
     delete writerObject.password;
@@ -70,7 +80,7 @@ WriterSchema.methods.generateAuthToken = async function () {
     const token = jwt.sign(
         {
         _id: writer._id.toString(),
-        name: writer.name
+        name: writer.firstName 
         },
         process.env.JWT_SECRET,
         { expiresIn: '24h' }

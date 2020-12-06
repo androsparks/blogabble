@@ -1,8 +1,8 @@
-//create posts 
-//delete posts 
-//update posts
 const router = require('express').Router(),
-{ createPost, deletePost } = require('../../controllers/postControllers')
+{ createPost, deletePost, getAllPosts } = require('../../controllers/postControllers')
 
+router.get('/api/posts', getAllPosts)
 router.post('/api/posts', createPost)
-router.delete('/api/posts/:id', deletePost)
+router.delete('/posts/:id', deletePost)
+
+module.exports = router;

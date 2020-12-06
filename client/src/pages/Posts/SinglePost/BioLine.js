@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Pane, Text } from 'evergreen-ui'
 
-const BioLine = () => {
+const BioLine = (props) => {
     return (
         <Pane
         height={30}
@@ -9,9 +9,9 @@ const BioLine = () => {
         alignItems="center"
         marginTop={5}
         >
-            <Avatar name="Jeroen Ransijn" size={25} marginRight={12} />
-            <Text marginRight={12} size={300} > Place Holder Name </Text>
-            <Text size={300} > Place Holder Date  </Text>
+            <Avatar name={props.name} src={props.avatar} size={25} marginRight={12} />
+            <Text marginRight={12} size={300} > {props.name} </Text>
+            <Text size={300} > {props.date}  </Text>
         </Pane>
     )
 }

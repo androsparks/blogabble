@@ -1,32 +1,56 @@
-import React from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import {Link } from 'react-router-dom'
+import axios from 'axios'
 import './Home.css'
+import { AppContext } from '../../context/AppContext';
 import {Card, Paragraph, Small} from 'evergreen-ui'
 
 const Home = () => {
+    const { currentUser, setCurrentUser } = useContext(AppContext);
+    const [posts, setPosts] = useState("")
+    //set array equalt to sate and map thorhg 
+    const getMyPosts = async () => {
+        try {
+            let response = await axios.get('/api/posts', { withCredentials: true })
+            console.log(response.data)
+            setPosts(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getMyPosts()
+    }, [])
+
     return (
-        <>
+        <main className="myposts-holder">
         <h1> MY POSTS </h1> 
         <div className="allposts-container">
-            <Card
-              height={120}
-              width={275}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              padding={2}
-            //   justifyContent="center"
-              border="default"> 
-                <div className="card-header"> <h3>Sample Title </h3> <span className="card-date"> Updated: </span></div>
+            {posts && posts.map((post) => {
+                return <Link to={`/post/${post._id}`}><Card  
+                height={120}
+                width={275}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                padding={2}
+                border="default"
+                margin={10}
+                > 
+                
+                 <div className="card-header"> <h3 className="card-title"> {post.title} </h3> <span className="card-date"> {post.updatedAt} </span></div>
                 <div className="card-content"> 
-                <Paragraph>
-                    Onec scelerisque sollicitudin enim eu venenatis. Duis tincidunt laoreet ex, 
-                    in pretium orci vestibulum eget. 
+                <Paragraph className="card-body">
+                    {post.body}
                 </Paragraph> 
                 <span className="card-comm"><Small> Number of Comments: </Small></span>
                 </div>
-            </Card>
+                </Card>
+                </Link>
+            })}
         </div>
-        </>
+        </main>
     )
 }
 

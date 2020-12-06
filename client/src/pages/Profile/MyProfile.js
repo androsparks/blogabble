@@ -16,7 +16,7 @@ const MyProfile = () => {
         alignItems="center">
         <section>
         <Avatar
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg"
+            src={currentUser?.avatar}
             name="Alan Turing"
             size={140}
         />
@@ -32,8 +32,8 @@ const MyProfile = () => {
         </form> */}
         </section>
         <section className="profile-info">
-        <Heading size={600} marginBottom={10} > FIRST NAME LAST NAME</Heading>
-        <Text> My name is someone and I like to write about whatever </Text>
+    <Heading size={600} marginBottom={10} > {currentUser?.firstName} {currentUser?.lastName}</Heading>
+        <Text> {currentUser?.bio} </Text>
         <EditProfile />
         {/* <Button marginY={8} marginRight={12} iconBefore={EditIcon} width={80}>Edit</Button> */}
         </section>

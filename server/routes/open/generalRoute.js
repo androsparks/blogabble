@@ -24,7 +24,7 @@ router.get('/password/:token', passwordRedirect);
 // GENERAL POST ROUTES 
 //*************************************** 
 
-router.get('/api/posts', getAllPosts)
+// router.get('/api/posts', getAllPosts)
 router.get('/api/posts/:id', getSinglePost)
 
 module.exports = router;

@@ -1,12 +1,13 @@
 import React from 'react'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import PrivateRoute from './components/PrivateRoute'
-import Posts from './pages/Posts/Posts'
+import Posts from './pages/Posts/Post'
 import NavigationBar from './components/NavigationBar'
 import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
 import Home from './pages/Home/Home'
 import Profile from './pages/Profile/Profiles'
+import MyProfile from './pages/Profile/MyProfile'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
          <Route exact path="/login" component={Login}/>
          <Route exact path="/post" component={Posts} />
          <Route exact path="/profile" component={Profile}/>
+         <Route exact path="/myprofile" component={MyProfile}/>
          <Route exact path ="/posts"/>
          {/* //eveyrone can get posts */}
          {/* post page will be the same but some PRivate route will have edit buttons, same with profiles  */}

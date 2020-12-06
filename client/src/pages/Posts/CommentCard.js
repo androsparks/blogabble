@@ -4,13 +4,13 @@ import {Card, Text, Paragraph, Avatar} from 'evergreen-ui'
 const CommentCard = () => {
     return (
         <Card
-        backgroundColor="white"
-        elevation={0}
-        height={240}
-        display="flex"
-        flexDirection="column"
-        padding={15}
-      >
+            backgroundColor="white"
+            elevation={0}
+            height={240}
+            display="flex"
+            flexDirection="column"
+            padding={15}
+        >
         <section className="comment-header">
             <Avatar name="Jeroen Ransijn" size={35} marginRight={12} />
             <div className="comment-meta">

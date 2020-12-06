@@ -8,7 +8,7 @@ const ToolBar = (props) => {
         height={30}
         display="flex"
         alignItems="center"
-        border="default">
+        >
             <IconButton appearance="minimal" icon={HeartIcon} iconSize={15} />
             <Text marginRight={12}> 100 </Text>
             <IconButton appearance="minimal" icon={CommentIcon} iconSize={15} onClick={props.onClick} />

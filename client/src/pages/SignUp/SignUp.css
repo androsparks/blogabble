@@ -1,0 +1,16 @@
+.main-form-su{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+.form-container{
+    padding: 1em 2em;
+    width: 350px;
+}
+
+.form-subtitle{
+    margin-bottom: 1em;
+}
+

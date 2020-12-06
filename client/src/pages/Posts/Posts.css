@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
+
 .post-container{
     display: flex;
     flex-direction: column;
@@ -15,18 +17,20 @@
     flex-direction: column;
 }
 
-/* .post-title{
-    grid-area: title;
-}
+@media only screen and (min-width: 650px) and (max-width: 1024px) {
+    .post-container{
+        padding: 0 3em;
+    }
+  }
+  
+  @media only screen and (min-width: 1025px) {
+    .post-container{
+        padding: 0 12em;
+    }
+  }
 
-.post-subtitle{
-    grid-area: subtitle;
-}
-
-.post-bio{
-    grid-area: bio;
-}
-
-.post-body{
-    grid-area: body;
+/* @media only screen and (min-device-width : 900px)  {
+    .post-container{
+        padding: 0 3em;
+    }
 } */

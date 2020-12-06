@@ -8,7 +8,7 @@ const Comments = (props) => {
         <SideSheet isShown={props.show}
         onCloseComplete={props.onCloseComplete}
         >
-        <Pane zIndex={1} flexShrink={0} elevation={0} backgroundColor="white">
+        <Pane zIndex={1} flexShrink={0} elevation={0} backgroundColor="white" >
         <Pane padding={16}>
             <Heading size={600}>Comments </Heading>
             <Paragraph size={400}>

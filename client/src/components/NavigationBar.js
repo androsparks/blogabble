@@ -7,7 +7,7 @@ import NavPopOver from './NavPopOver'
 const NavigationBar = () => {
 
     return (
-    <Pane height={35}
+    <Pane height={50}
     paddingBottom={5}
     display="flex"
     alignItems="center"

@@ -19,7 +19,7 @@ const Login = ({history}) => {
         const response = await axios.post('/api/login', loginData);
         sessionStorage.setItem('user', response.data);
         setCurrentUser(response.data.user);
-        history.push('/profile/me');
+        history.push('/me/profile');
       } catch (error) {
         console.log('SignUp Error: ', error);
       }

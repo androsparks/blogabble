@@ -1,11 +1,27 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import './UpdatePost.css'
 import {Textarea, TextInput, Text, Label, Button} from 'evergreen-ui'
 import { AppContext } from '../../../context/AppContext';
 
-const CreatePost = ({history}) => {
+const UpdatePost = ({match, history}) => {
     const { currentUser } = useContext(AppContext)
     const [formData, setFormData] = useState(null);
+    const [post, setPost] = useState("")
+
+    useEffect(() => {
+        getSinglePost()
+    }, [])
+
+    const getSinglePost = async () => {
+        try {
+            let response = await axios.get(`/api/posts/${match.params.id}`, {withCredentials: true})
+            console.log(response.data)
+            setPost(response.data.post)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleChange = (event) => {
       setFormData({ ...formData, [event.target.id]: event.target.value });
@@ -16,7 +32,7 @@ const CreatePost = ({history}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('/api/posts', formData);
+        const response = await axios.post('/api/posts/:id', formData);
         history.push('/post/:id');
       } catch (error) {
         console.log(error)
@@ -24,37 +40,43 @@ const CreatePost = ({history}) => {
     };
 
     return (
-        <div>
-            <h1> CREATE A NEW POST </h1> 
+        <main className="updatePost-container">
+            <h1> UPDATE YOUR POST </h1> 
             <form onSubmit={handleSubmit}>
             <Label htmlFor="title" display="block" margin={4}> Title of Post </Label>
             <TextInput
                 id="title"
                 name="text-input-name"
                 onChange={handleChange}
-                placeholder="Title of post"
-            />
+                defaultValue={post?.title}
+            /> 
             <Label htmlFor="subtitle" display="block" margin={4}> Subtitle </Label>
             <TextInput
                 id="subtitle"
                 name="text-input-name"
                 onChange={handleChange}
-                placeholder="Subtitle"
-            />
+                defaultValue={post?.subtitle}
+            /> 
             <Label htmlFor="body" display="block" margin={4}> Post Content </Label>
             <Textarea
                 id="body"
                 name="textarea-1"
-                placeholder="Enter you blog post here..."
                 onChange={handleChange}
                 width={"80%"}
-            />
+                defaultValue={post?.body}
+                //467x200
+                width={700}
+                height={200}
+            /> 
             <Button type="submit" height={32} appearance="primary" display="block" marginTop={20}>
-            Submit
+            Update
             </Button>
             </form>
-        </div>
+            <Button type="submit" height={32} appearance="primary" intent="danger" display="block" marginTop={20}>
+            Delete Post
+            </Button>
+        </main>
     )
 }
 
-export default CreatePost
+export default UpdatePost

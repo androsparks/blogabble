@@ -9,6 +9,7 @@ import Home from './pages/Home/Home'
 import Profile from './pages/Profile/Profiles'
 import MyProfile from './pages/Profile/MyProfile'
 import CreatePost from './pages/Posts/CreatePost/CreatePost'
+import UpdatePost from './pages/Posts/UpdatePost/UpdatePost'
 import { AppContextProvider } from './context/AppContext';
 
 function App() {
@@ -32,10 +33,10 @@ function App() {
          {/* get all user posts with update button */}
          {/* <PrivateRoute exact path="/myposts" />  */}
           {/* update user id */}
-         <PrivateRoute exact path="/profile/me" component={MyProfile}/>
-         <PrivateRoute exact path ="/post/new" component={CreatePost}/>
-         <PrivateRoute exact path ="/posts/me" component={Home}/>
-         <PrivateRoute exact path="/post/update/:id"/>
+         <PrivateRoute exact path="/me/profile" component={MyProfile}/>
+         <PrivateRoute exact path ="/me/post/new" component={CreatePost}/>
+         {/* <PrivateRoute exact path ="/me/posts" component={PostManager}/> */}
+         <PrivateRoute exact path="/me/update/:id" component={UpdatePost}/>
        </Switch>
       </BrowserRouter>
       </AppContextProvider>

@@ -25,10 +25,10 @@ const Home = () => {
 
     return (
         <main className="myposts-holder">
-        <h1> MY POSTS </h1> 
+        {/* <h1> MY POSTS </h1>  */}
         <div className="allposts-container">
             {posts && posts.map((post) => {
-                return <Link to={`/post/${post._id}`}><Card  
+                return <Link className="card-link" to={`/me/update/${post._id}`}><Card  
                 height={120}
                 width={275}
                 display="flex"

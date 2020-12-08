@@ -3,6 +3,7 @@ import {Pane, Avatar, Heading,Text, FilePicker, Button, EditIcon } from 'evergre
 import './Profile.css'
 import { AppContext } from '../../context/AppContext';
 import EditProfile from './EditProfile'
+import Home from '../Home/Home'
 
 const MyProfile = () => {
     const [change, setChange] = useState(false)
@@ -10,6 +11,7 @@ const MyProfile = () => {
 
     return (
         <main className="profile-container">
+        <h1> YOUR PROFILE </h1>
         <Pane
         width="80%"
         display="flex"
@@ -41,8 +43,9 @@ const MyProfile = () => {
         <Pane
         width="80%"
         border="default">
-            <Heading size={400} marginBottom={10} > Checkout their posts </Heading>
-            <div> POSTS HERE</div>
+            <Heading size={400} marginBottom={10} marginTop={10} > Your posts are below, click on a post to edit it </Heading>
+            {/* <div> POSTS HERE</div> */}
+            <Home />
         </Pane>
         </main>
     )

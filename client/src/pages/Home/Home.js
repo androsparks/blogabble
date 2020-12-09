@@ -1,56 +1,43 @@
-import React, {useState, useContext, useEffect} from 'react'
-import {Link } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import './Home.css'
-import { AppContext } from '../../context/AppContext';
-import {Card, Paragraph, Small} from 'evergreen-ui'
+import {SearchInput, Heading, Combobox, Pane} from 'evergreen-ui'
 
 const Home = () => {
-    const { currentUser, setCurrentUser } = useContext(AppContext);
-    const [posts, setPosts] = useState("")
-    //set array equalt to sate and map thorhg 
-    const getMyPosts = async () => {
-        try {
-            let response = await axios.get('/api/posts', { withCredentials: true })
-            console.log(response.data)
-            setPosts(response.data)
-        } catch (error) {
+    const [search, setSearch] = useState("")
+    const [looking, setLooking ] = useState("")
+
+    const findSearch = async () => {
+        try{
+            const response = await axios.get('/api/search', { params: { looking, search } })
+        } catch(error){
             console.log(error)
         }
+       
     }
 
     useEffect(() => {
-        getMyPosts()
-    }, [])
+        findSearch()
+    }, [looking, search])
 
     return (
-        <main className="myposts-holder">
-        {/* <h1> MY POSTS </h1>  */}
-        <div className="allposts-container">
-            {posts && posts.map((post) => {
-                return <Link className="card-link" to={`/me/update/${post._id}`}><Card  
-                height={120}
-                width={275}
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                padding={2}
-                border="default"
-                margin={10}
-                > 
-                
-                 <div className="card-header"> <h3 className="card-title"> {post.title} </h3> <span className="card-date"> {post.updatedAt} </span></div>
-                <div className="card-content"> 
-                <Paragraph className="card-body">
-                    {post.body}
-                </Paragraph> 
-                <span className="card-comm"><Small> Number of Comments: </Small></span>
-                </div>
-                </Card>
-                </Link>
-            })}
-        </div>
+        <main>
+        
+        <Pane display="flex" flexDirection="column">
+        <Heading> What are you looking for today? </Heading>
+            <Combobox
+                items={['User', 'Post']}
+                width={200}
+                onChange={selected => setLooking(selected)}
+                placeholder="I am searching for a.."
+                autocompleteProps={{
+                    // Used for the title in the autocomplete.
+                    title: 'Select One'
+                }}
+            />
+            <SearchInput placeholder="Search ..." height={40} onChange={e => setSearch(e.target.value)} />
+        </Pane>
         </main>
+
     )
 }
 

@@ -17,6 +17,10 @@
     flex-direction: column;
 }
 
+.ac-form{
+    display: flex;
+}
+
 @media only screen and (min-width: 650px) and (max-width: 1024px) {
     .post-container{
         padding: 0 3em;

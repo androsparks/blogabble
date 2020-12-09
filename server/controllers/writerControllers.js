@@ -33,7 +33,7 @@ exports.getSingleWriter = async (req, res) => {
 
 exports.getCurrentWriter = async (req, res) => {
   console.log("got me")
-  console.log(req.user)
+  // console.log(req.user)
     res.json(req.user);
   };
 

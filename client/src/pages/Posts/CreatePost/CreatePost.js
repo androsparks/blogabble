@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import './CreatePost.css'
 import {Textarea, TextInput, Text, Label, Button} from 'evergreen-ui'
 import { AppContext } from '../../../context/AppContext';
 
@@ -16,8 +17,9 @@ const CreatePost = ({history}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('/api/posts', formData);
-        history.push('/post/:id');
+        const response = await axios.post('/api/posts', formData, {withCredentials: true});
+        // console.log(typeof response.data._id)
+        history.push(`/post/${response.data._id}`);
       } catch (error) {
         console.log(error)
       }

@@ -1,24 +1,25 @@
 import React from 'react'
 import {Card, Text, Paragraph, Avatar} from 'evergreen-ui'
 
-const CommentCard = () => {
+const CommentCard = (props) => {
     return (
         <Card
             backgroundColor="white"
             elevation={0}
-            height={240}
+            height={"auto"}
             display="flex"
             flexDirection="column"
             padding={15}
+            margin={10}
         >
         <section className="comment-header">
-            <Avatar name="Jeroen Ransijn" size={35} marginRight={12} />
+            <Avatar name={props.owner} size={35} marginRight={12} />
             <div className="comment-meta">
-                <Text > FIRST NAME LAST NAME </Text> 
-                <Text > 8 days ago </Text> 
+                <Text > {props.owner || 'Anonymous'} </Text> 
+                <Text > {props.date} </Text> 
             </div>
         </section>
-        <Paragraph marginTop="default"> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with</Paragraph>
+    <Paragraph marginTop="default"> {props.comment}</Paragraph>
       </Card>
     )
 }

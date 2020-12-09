@@ -38,10 +38,10 @@ const Posts = ({match}) => {
         <div className="post-container">
             <Heading size={900} is="h1" marginTop="default" fontFamily='Castoro'>{post?.title}</Heading>
             <Text size={500}  marginTop="default"> {post?.subtitle} </Text>
-            <BioLine  marginTop="default" name={writer?.firstName+" "+writer?.lastName} date={post?.createdAt} avatar={writer?.avatar} />
+            <BioLine  marginTop="default" name={writer?.firstName+" "+writer?.lastName} date={post?.updatedAt} avatar={writer?.avatar} />
             <Paragraph size={300} marginTop="default">{post?.body}</Paragraph>
             <ToolBar onClick={onClick}  marginTop="default" />
-            <Comments show={show} onCloseComplete={onCloseComplete} />
+            <Comments show={show} onCloseComplete={onCloseComplete} postID={match.params.id} />
         </div>
     )
 }

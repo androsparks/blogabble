@@ -32,8 +32,8 @@ const UpdatePost = ({match, history}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('/api/posts/:id', formData);
-        history.push('/post/:id');
+        const response = await axios.put(`/api/posts/${match.params.id}`, formData, {withCredentials: true});
+        history.push('/me/posts');
       } catch (error) {
         console.log(error)
       }
@@ -72,7 +72,7 @@ const UpdatePost = ({match, history}) => {
             Update
             </Button>
             </form>
-            <Button type="submit" height={32} appearance="primary" intent="danger" display="block" marginTop={20}>
+            <Button height={32} appearance="primary" intent="danger" display="block" marginTop={20}>
             Delete Post
             </Button>
         </main>

@@ -1,14 +1,18 @@
 const Post = require('../db/models/postModel'),
-Writer = require('../db/models/writerModel')
+Writer = require('../db/models/writerModel'),
+mongoose = require('mongoose')
 
 exports.createPost = (req, res) => {
+    console.log("HOADSIUSGFYDGIUHAJI")
     Post.create(req.body, (error, post) => {
         if(error) {
             console.log(`Error creating Post, ${new Date()}: ${error}`)
             res.status(400).json(error)
         } else {
-            console.log(req.body)
-            console.log(post)
+            // console.log(req.body)
+            // console.log(post)
+            post.owner = req.user._id
+            post.save()
             res.status(201).json(post)
         }
     }
@@ -17,9 +21,9 @@ exports.createPost = (req, res) => {
 
 exports.getAllPosts =async (req, res) => {
     // Post.find().then(all => res.json(all))
-    console.log("here ia m")
+    // console.log("here ia m")
     // console.log(req.headers)
-    console.log(req.cookies)
+    // console.log(req.cookies)
     try {
         await req.user
           .populate({
@@ -34,8 +38,9 @@ exports.getAllPosts =async (req, res) => {
 }
 
 exports.getSinglePost = async (req, res) => {
+    let newOb = mongoose.Types.ObjectId(req.params.id)
     try {
-        let post = await Post.findById(req.params.id)
+        let post = await Post.findById(newOb)
         let writerData = await Writer.findById(post.owner)
         const { firstName, lastName, avatar} = writerData
         const writer = {
@@ -50,8 +55,9 @@ exports.getSinglePost = async (req, res) => {
 }
 
 exports.updatePost = async (req, res) => {
+    console.log("OAJDOIJSIOD")
     const updates = Object.keys(req.body);
-    const allowedUpdates = ['title', 'body'];
+    const allowedUpdates = ['title', 'body, subtitle'];
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
     );
@@ -59,6 +65,7 @@ exports.updatePost = async (req, res) => {
         return res.status(400).json({ message: 'Invalid updates' })
     };
     const post = await Post.findById(req.params.id)
+    console.log("this is my post", post)
     try {
         updates.forEach((update) => (post[update] = req.body[update]));
         await post.save();

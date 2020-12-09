@@ -31,7 +31,7 @@ const NavPopOver = () => {
                 flexDirection="column"
                 padding={15}
             > 
-            <Link to={'/posts/me'}> Posts </Link>
+            <Link to={'/me/posts'}> Posts </Link>
             </Card>
             <Card
                 backgroundColor="white"

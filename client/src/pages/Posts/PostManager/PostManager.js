@@ -1,5 +1,9 @@
-import React from 'react'
-import {Pane, Paragraph, Small, Button} from 'evergreen-ui'
+import React, {useState, useContext, useEffect} from 'react'
+import axios from 'axios'
+import {Link} from 'react-router-dom'
+import './PostManager.css'
+import {Pane, Small, Button, IconButton, EyeOpenIcon} from 'evergreen-ui'
+import { AppContext } from '../../../context/AppContext';
 
 const PostManager = () => {
     const { currentUser, setCurrentUser } = useContext(AppContext);
@@ -14,6 +18,9 @@ const PostManager = () => {
         }
     }
 
+    //add button to "view" as poster 
+    //so link to post/:id
+
     useEffect(() => {
         getMyPosts()
     }, [])
@@ -21,28 +28,25 @@ const PostManager = () => {
     return (
         <main className="post-manager-holder">
         <h1> MY POSTS </h1> 
+        <Small> Scroll through your posts, edit, or delete them! </Small> 
+        <Link to={`/me/post/new`}> <Button> Create a New Post </Button> </Link>
         <div className="post-list-container">
-            <Small> Scroll through your posts, edit, or delete them! </Small> 
-            <Button> Create New Account </Button>
             {posts && posts.map((post) => {
-                return 
-                <Pane  
-                height={120}
-                width={275}
+                return <Pane  
+                width={500}
                 display="flex"
+                alignItems="center"
                 padding={2}
                 border="default"
                 margin={10}
                 > 
-                 {/* <div className="card-header">  */}
-                <h3 className="card-title"> {post.title} </h3> 
-                <h3 className="card-date"> {post.updatedAt} </h3>
-                 {/* </div> */}
-                {/* <div className="card-content">  */}
-                <Button> UPDATE </Button>
-                <Button> DELETE </Button>
-                {/* <span className="card-comm"><Small> Number of Comments: </Small></span> */}
-                {/* </div> */}
+                <h3 className="pm-card-title mS"> {post.title} </h3> 
+                <div className="pm-card-content"> 
+                <h3 className="card-date mS"> {post.updatedAt} </h3>
+                <Link to={`/post/${post._id}`}> <IconButton className="mS" icon={EyeOpenIcon} /> </Link>
+                <Link to={`/me/update/${post._id}`}> <Button className="mS"> UPDATE </Button> </Link>
+                <Button className="mS"> DELETE </Button>
+                </div>
                 </Pane>
             })}
         </div>

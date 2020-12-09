@@ -1,7 +1,33 @@
 .post-manager-holder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .post-list-container{
+    border: solid 1px gray;
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
     
+}
+
+.pm-card-title {
+    overflow: hidden;
+    max-width: 45%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pm-card-content{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.mS {
+    margin: 0.3em;
 }

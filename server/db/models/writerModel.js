@@ -67,7 +67,7 @@ WriterSchema.virtual('posts', {
 });
 
 WriterSchema.methods.toJSON = function () {
-  console.log("activated")
+  // console.log("activated")
     const writer = this;
     const writerObject = writer.toObject();
     delete writerObject.password;

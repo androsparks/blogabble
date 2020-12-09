@@ -16,9 +16,9 @@ passport.use(
     if (Date.now() > jwtPayload.expires) {
       return done(null, false, { message: 'jwt expired' });
     }
-    console.log(jwtPayload)
+    // console.log(jwtPayload)
     let { iat, exp, ...writerData } = jwtPayload;
-    console.log(writerData)
+    // console.log(writerData)
     writerData = await Writer.findById(writerData._id);
     return done(null, writerData);
   })

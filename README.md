@@ -20,6 +20,14 @@ Once you clone and cd into this repo, in the project directory:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+### Testing/Demoing the App 
+
+In order to seed the database with writers, posts, comments, run the following command in the root directory:
+
+-`node server/db/seeds/index.js`
+
+Each writer will have password of '12345678'. This can be adjusted in the seed file. 
+
 ### Dependencies
 
 | BackEnd             | FrontEnd           |

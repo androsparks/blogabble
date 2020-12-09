@@ -28,8 +28,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Dependencies
 
-| BackEnd             |FrontEnd            |
-| ------------------- |:------------------:|
+| BackEnd             | FrontEnd           |
+| ------------------- | ------------------ |
 | bcryptjs            | axios              |
 | cloudinary          | evergreen-ui       | 
 | dateformat          | react              |

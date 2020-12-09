@@ -16,7 +16,6 @@ const UpdatePost = ({match, history}) => {
     const getSinglePost = async () => {
         try {
             let response = await axios.get(`/api/posts/${match.params.id}`, {withCredentials: true})
-            console.log(response.data)
             setPost(response.data.post)
         } catch (error) {
             console.log(error)
@@ -25,8 +24,6 @@ const UpdatePost = ({match, history}) => {
 
     const handleChange = (event) => {
       setFormData({ ...formData, [event.target.id]: event.target.value });
-      console.log(formData);
-      console.log(event);
     };
   
     const handleSubmit = async (e) => {
@@ -64,7 +61,6 @@ const UpdatePost = ({match, history}) => {
                 onChange={handleChange}
                 width={"80%"}
                 defaultValue={post?.body}
-                //467x200
                 width={700}
                 height={200}
             /> 

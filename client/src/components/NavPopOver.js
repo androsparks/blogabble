@@ -26,8 +26,6 @@ const NavPopOver = () => {
             width={240}
             height={250}
             display="flex"
-            // alignItems="center"
-            // justifyContent="center"
             flexDirection="column"
             >
             <Card

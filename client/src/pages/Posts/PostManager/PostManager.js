@@ -11,7 +11,7 @@ const PostManager = () => {
     const getMyPosts = async () => {
         try {
             let response = await axios.get('/api/posts', { withCredentials: true })
-            console.log(response.data)
+
             setPosts(response.data)
         } catch (error) {
             console.log(error)

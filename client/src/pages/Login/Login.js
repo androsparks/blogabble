@@ -38,7 +38,6 @@ const Login = ({history}) => {
             placeholder="Email"
             type="email"
             onChange={handleChange}
-            // validationMessage="This field is required"
             />
             <TextInputField
             required

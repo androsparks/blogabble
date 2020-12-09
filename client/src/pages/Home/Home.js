@@ -12,8 +12,6 @@ const Home = () => {
     const findSearch = async () => {
         try{
             const {data} = await axios.get('/api/search', { params: { looking, search } })
-            console.log()
-            console.log(data)
             setResults(data)
         } catch(error){
             console.log(error)

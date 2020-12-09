@@ -24,7 +24,6 @@ exports.createWriter = async (req, res) => {
 
 exports.getSingleWriter = async (req, res) => {
     try {
-        console.log(req.params.id);
         let user = await Writer.findById(req.params.id);
         await user
           .populate({
@@ -51,7 +50,6 @@ exports.updateWriter = async (req, res) => {
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
     );
-    console.log('I made it past valid')
     if (!isValidOperation)
       return res.status(400).json({ message: 'Invalid updates' });
     try {
@@ -94,7 +92,6 @@ exports.deleteWriter = async (req, res) => {
 
 exports.loginWriter = async (req, res) => {
   const {email, password} = req.body
-  console.log("at login")
     try {
         const user = await Writer.findByCredentials(email, password);
         const token = await user.generateAuthToken();

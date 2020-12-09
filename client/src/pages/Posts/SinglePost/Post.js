@@ -23,7 +23,6 @@ const Posts = ({match}) => {
     const getSinglePost = async () => {
         try {
             let response = await axios.get(`/api/posts/${match.params.id}`, {withCredentials: true})
-            console.log(response.data)
             setPost(response.data.post)
             setWriter(response.data.writer)
         } catch (error) {

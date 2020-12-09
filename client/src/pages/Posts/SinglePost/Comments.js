@@ -12,10 +12,8 @@ const Comments = (props) => {
 
     const getAllComments = async () => {
         try { 
-            console.log(props.postID)
             let response = await axios.get(`/api/comments/post/${props.postID}`)
             setComments(response.data)
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }

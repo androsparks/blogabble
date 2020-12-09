@@ -42,13 +42,6 @@ const WriterSchema = new Schema ({
       },
       bio: String,
       avatar: String,
-      // posts: [
-      //     {
-      //       type: mongoose.Schema.Types.ObjectId,
-      //       ref: 'Conversation',
-      //       // unique: true
-      //     }
-      // ],
       tokens: [
         {
           token: {
@@ -67,7 +60,6 @@ WriterSchema.virtual('posts', {
 });
 
 WriterSchema.methods.toJSON = function () {
-  // console.log("activated")
     const writer = this;
     const writerObject = writer.toObject();
     delete writerObject.password;

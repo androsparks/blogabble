@@ -38,11 +38,10 @@ const dbReset = async () => {
       email: faker.internet.email(),
       password: '12345678',
       bio: faker.lorem.sentence(),
-      avatar: `https://i.pravatar.cc/300?u=${i}`
+      avatar: faker.image.imageUrl()
     });
     await me.generateAuthToken();
     userIdArray.push(me._id);
-    console.log(typeof userIdArray[0])
   }
 
   // Loop 100 times and create 100 new messages
@@ -55,7 +54,6 @@ const dbReset = async () => {
         date: faker.date.between('2020-01-01', '2020-12-01'),
         body: faker.lorem.paragraphs()
     });
-    // console.log(typeof post.owner)
     await post.save()
     postArray.push(post._id);
   }

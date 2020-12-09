@@ -9,7 +9,6 @@ const EditProfile = ({history}) => {
   const [image, setImage] = useState(null)
 
   const handleImageSelect = (e) => {
-    console.log(e[0])
     setImage(e[0])
   }
 
@@ -23,7 +22,6 @@ const EditProfile = ({history}) => {
     const allData = new FormData()
     allData.append('body', JSON.stringify(updateData))
     if (image) {
-      console.log("I AM GERE")
       allData.append('avatar', image, image.name)
     }
     try {
@@ -36,7 +34,6 @@ const EditProfile = ({history}) => {
           'Content-Type': 'multipart/form-data'
         }
       })
-      console.log(response.data)
       setCurrentUser(response.data)
       setUpdateData(null)
       form.reset()
@@ -75,7 +72,6 @@ const EditProfile = ({history}) => {
     <Text> Avatar Upload:</Text>
     <FilePicker
         width={100}
-        // marginBottom={32}
         onChange={(e)=> handleImageSelect(e)}
         placeholder="Select the file here!"
     />

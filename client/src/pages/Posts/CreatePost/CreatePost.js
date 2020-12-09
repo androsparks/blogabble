@@ -10,7 +10,6 @@ const CreatePost = ({history}) => {
 
     const handleChange = (event) => {
       setFormData({ ...formData, [event.target.id]: event.target.value });
-      console.log(formData);
       console.log(event);
     };
   
@@ -18,7 +17,6 @@ const CreatePost = ({history}) => {
       e.preventDefault();
       try {
         const response = await axios.post('/api/posts', formData, {withCredentials: true});
-        // console.log(typeof response.data._id)
         history.push(`/post/${response.data._id}`);
       } catch (error) {
         console.log(error)

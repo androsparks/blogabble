@@ -13,8 +13,6 @@ const Profiles = ({match}) => {
             let response = await axios.get(`/api/writer/${match.params.id}`)
             setUserInfo(response.data.user)
             setPosts(response.data.posts)
-            console.log(response.data)
-            
         } catch (error) {
             console.log(error)
         }

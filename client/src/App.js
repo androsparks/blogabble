@@ -26,10 +26,6 @@ function App() {
          <Route exact path="/login" component={Login}/>
          <Route exact path="/post/:id" component={Post} />
          <Route exact path="/profile/:id" component={Profile}/>
-         {/* <Route exact path ="/posts"/> */}
-         {/* //eveyrone can get posts */}
-         {/* post page will be the same but some Private route will have edit buttons, same with profiles  */}
-         {/* cross reference the owner of the blog post with the current user if the same render update button */}
          <PrivateRoute exact path="/me/profile" component={MyProfile}/>
          <PrivateRoute exact path ="/me/post/new" component={CreatePost}/>
          <PrivateRoute exact path="/me/update/:id" component={UpdatePost}/>

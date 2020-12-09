@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
-import {Pane, Avatar, Heading,Text, FilePicker, Button, EditIcon } from 'evergreen-ui'
+import {Pane, Avatar, Heading,Text, Button } from 'evergreen-ui'
 import './Profile.css'
 
 import { AppContext } from '../../context/AppContext';
@@ -19,7 +19,6 @@ const MyProfile = ({history}) => {
     const getMyPosts = async () => {
         try {
             let response = await axios.get('/api/posts', { withCredentials: true })
-            console.log(response.data)
             setPosts(response.data)
         } catch (error) {
             console.log(error)

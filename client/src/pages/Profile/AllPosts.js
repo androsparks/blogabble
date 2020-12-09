@@ -1,29 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState,} from 'react'
 import {Link } from 'react-router-dom'
-import axios from 'axios'
-// import './Home.css'
-import { AppContext } from '../../context/AppContext';
+
 import {Card, Paragraph, Small} from 'evergreen-ui'
 
 const AllPosts= (props) => {
-    // const { currentUser, setCurrentUser } = useContext(AppContext);
     const [posts, setPosts] = useState(props.posts)
-    //set array equalt to sate and map thorhg 
-    //perhaps do a new contoller that is a genral get posts 
-    //not req.user but compares users to 
-    // const getMyPosts = async () => {
-    //     try {
-    //         let response = await axios.get('/api/posts', { withCredentials: true })
-    //         console.log(response.data)
-    //         setPosts(response.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
-    useEffect(() => {
-        console.log("done")
-    }, [])
 
     return (
         <main className="myposts-holder">

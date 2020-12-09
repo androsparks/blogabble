@@ -15,7 +15,6 @@ const SignUp = () => {
             width={420}
             label="First Name:"
             placeholder="First Name"
-            // validationMessage="This field is required"
             />
             <TextInputField
             label="Last Name"
@@ -23,7 +22,6 @@ const SignUp = () => {
             id=""
             width={420}
             placeholder="Last Name"
-            // validationMessage="This field is required"
             />
             <TextInputField
             required
@@ -32,7 +30,6 @@ const SignUp = () => {
             label="Email"
             placeholder="Email"
             type="email"
-            // validationMessage="This field is required"
             />
             <TextInputField
             required

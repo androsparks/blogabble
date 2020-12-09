@@ -15,7 +15,6 @@ export const AppContextProvider = ({ children }) => {
           withCredentials: true
         })
         .then((response) => {
-          console.log(response.data);
           setCurrentUser(response.data);
         })
         .catch((error) => console.error(error));

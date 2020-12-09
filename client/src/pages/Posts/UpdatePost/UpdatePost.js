@@ -5,13 +5,23 @@ import {Textarea, TextInput, Text, Label, Button} from 'evergreen-ui'
 import { AppContext } from '../../../context/AppContext';
 
 const UpdatePost = ({match, history}) => {
-    const { currentUser } = useContext(AppContext)
+    const { loading, setLoading } = useContext(AppContext)
     const [formData, setFormData] = useState(null);
     const [post, setPost] = useState("")
 
+    const deletePost = async () => {
+        try {
+            let response = await axios.delete(`/api/posts/${match.params.id}`, { withCredentials: true })
+            setLoading(!loading)
+            history.push("/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getSinglePost()
-    }, [])
+    }, [loading])
 
     const getSinglePost = async () => {
         try {
@@ -68,7 +78,7 @@ const UpdatePost = ({match, history}) => {
             Update
             </Button>
             </form>
-            <Button height={32} appearance="primary" intent="danger" display="block" marginTop={20}>
+            <Button onClick={deletePost} height={32} appearance="primary" intent="danger" display="block" marginTop={20}>
             Delete Post
             </Button>
         </main>

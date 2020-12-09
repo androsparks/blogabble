@@ -34,6 +34,7 @@ exports.getSinglePost = async (req, res) => {
     let newOb = mongoose.Types.ObjectId(req.params.id)
     try {
         let post = await Post.findById(newOb)
+        console.log(post)
         let writerData = await Writer.findById(post.owner)
         const { firstName, lastName, avatar} = writerData
         const writer = {

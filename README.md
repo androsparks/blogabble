@@ -28,30 +28,18 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Dependencies
 
-| BackEnd             |
-| ------------------- |
-| bcryptjs            | 
-| cloudinary          | 
-| dateformat          |
-| express             |
-| express-fileupload  |
-| faker               |
-| jsonwebtoken        |
-| mongoose            |
-| passport            |
+| BackEnd             |FrontEnd            |
+| ------------------- |:------------------:|
+| bcryptjs            | axios              |
+| cloudinary          | evergreen-ui       | 
+| dateformat          | react              |
+| express             | react-dom          |
+| express-fileupload  | react-router-dom   |
+| faker               | faker              |
+| jsonwebtoken        | jsonwebtoken       |
+| mongoose            | react-scripts      |
+| passport            | web-vitals         |
 | passport-jwt        |
 | validator           |
-
-| FrontEnd            |
-| ------------------- |
-| axios               | 
-| evergreen-ui        | 
-| react               |
-| react-dom           |
-| react-router-dom    |
-| faker               |
-| jsonwebtoken        |
-| react-scripts       |
-| web-vitals          |
 
  

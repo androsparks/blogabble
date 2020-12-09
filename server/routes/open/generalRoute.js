@@ -3,7 +3,9 @@ const router = require('express').Router(),
     createWriter, requestPasswordReset, passwordRedirect, loginWriter
 } = require('../../controllers/writerControllers'),
 { getSinglePost, getAllPosts } = require('../../controllers/postControllers'),
-{getAllComments, createComment} = require('../../controllers/commentsControllers')
+{getAllComments, createComment} = require('../../controllers/commentsControllers'),
+ Writer = require('../../db/models/writerModel'),
+ Post = require('../../db/models/postModel')
 
 
 //*************************************** 
@@ -39,9 +41,13 @@ router.get('/api/search', async (req,res)=>{
     const {search} = req.query
     console.log(theQuerey, search)
     if (theQuerey === 'User') {
-
         //need to import writer
-        await Writer.find({firstName: search})
+        let writer = await Writer.find({$or: [ {firstName: search}, {lastName: search}]})
+        //{ $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } 
+        res.json(writer)
+    } else if (theQuerey === 'Post' ) {
+        let posts = await Post.find({body: {$regex: search}})
+        res.json(posts)
     }
 })
 

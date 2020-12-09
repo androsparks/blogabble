@@ -92,9 +92,13 @@ WriterSchema.methods.generateAuthToken = async function () {
 
 WriterSchema.statics.findByCredentials = async (email, password) => {
   const user = await Writer.findOne({ email });
-  if (!user) throw new Error('Writer not found');
+  if (!user) {
+    throw new Error('Writer not found')
+  };
   const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) throw new Error('Invalid password, try again.');
+  if (!isMatch) {
+    throw new Error('Invalid password, try again.')
+  };
   return user;
 };
 

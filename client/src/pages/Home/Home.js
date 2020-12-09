@@ -5,10 +5,13 @@ import {SearchInput, Heading, Combobox, Pane} from 'evergreen-ui'
 const Home = () => {
     const [search, setSearch] = useState("")
     const [looking, setLooking ] = useState("")
+    const [results, setResults] = useState("")
+
 
     const findSearch = async () => {
         try{
-            const response = await axios.get('/api/search', { params: { looking, search } })
+            const {data} = await axios.get('/api/search', { params: { looking, search } })
+            setResults(data)
         } catch(error){
             console.log(error)
         }
@@ -35,6 +38,9 @@ const Home = () => {
                 }}
             />
             <SearchInput placeholder="Search ..." height={40} onChange={e => setSearch(e.target.value)} />
+        </Pane>
+        <Pane>
+            {results && results.map(result => <div> {result._id}</div>)}
         </Pane>
         </main>
 

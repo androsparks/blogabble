@@ -4,7 +4,7 @@ This is a simple application that allows writers to create an account and post b
 
 ![Profile](./Images/ProfileImage.png)
 ![Search](./Images/Search.png)
-![Login](./WelcomeBack.png)
+![Login](./Images/WelcomeBack.png)
 
 
 ## How was it built?

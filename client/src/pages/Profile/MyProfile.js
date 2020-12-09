@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react'
+import axios from 'axios'
 import {Pane, Avatar, Heading,Text, FilePicker, Button, EditIcon } from 'evergreen-ui'
 import './Profile.css'
 
@@ -6,10 +7,20 @@ import { AppContext } from '../../context/AppContext';
 import EditProfile from './EditProfile'
 import AllPosts from './AllPosts'
 
-const MyProfile = () => {
+const MyProfile = ({history}) => {
     const [change, setChange] = useState(false)
-    const { currentUser, setCurrentUser } = useContext(AppContext);
+    const { currentUser, setCurrentUser, setLoading, loading } = useContext(AppContext);
 
+    const deleteMe = async () => {
+        try {
+            let response = await axios.delete(`/api/me`, { withCredentials: true })
+            setLoading(!loading)
+            setCurrentUser(null)
+            history.push('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <main className="profile-container">
@@ -26,9 +37,12 @@ const MyProfile = () => {
         />
         </section>
         <section className="profile-info">
-    <Heading size={600} marginBottom={10} > {currentUser?.firstName} {currentUser?.lastName}</Heading>
+        <Heading size={600} marginBottom={10} > {currentUser?.firstName} {currentUser?.lastName}</Heading>
         <Text> {currentUser?.bio} </Text>
+        <Pane>
         <EditProfile />
+        <Button onClick={deleteMe} intent="danger"> DELETE</Button>
+        </Pane>
         </section>
         </Pane>
         <Pane

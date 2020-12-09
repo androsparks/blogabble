@@ -1,8 +1,27 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {Pane, Avatar, Heading,Text } from 'evergreen-ui'
 import './Profile.css'
 
-const Profiles = () => {
+const Profiles = ({match}) => {
+    const [userInfo, setUserInfo] = useState("")
+    const [posts, setPosts] = useState("")
+
+    const getSingleUser = async () => {
+        try {
+            let response = await axios.get(`/api/writer/${match.params.id}`)
+            setUserInfo(response.data.user)
+            setPosts(response.data.posts)
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getSingleUser()
+    }, [])
+
     return (
         <main className="profile-container">
         <Pane
@@ -11,13 +30,13 @@ const Profiles = () => {
         display="flex"
         alignItems="center">
         <Avatar
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg"
-            name="Alan Turing"
+            src={userInfo?.avatar}
+            name={userInfo?.firstName+" "+userInfo?.lastName}
             size={140}
         />
         <section className="profile-info">
-        <Heading size={600} marginBottom={10} > FIRST NAME LAST NAME</Heading>
-        <Text> My name is someone and I like to write about whatever </Text>
+        <Heading size={600} marginBottom={10} > {userInfo?.firstName+" "+userInfo?.lastName}</Heading>
+        <Text> {userInfo?.bio} </Text>
         </section>
         </Pane>
         <Pane

@@ -19,11 +19,7 @@ exports.createPost = (req, res) => {
   )
 }
 
-exports.getAllPosts =async (req, res) => {
-    // Post.find().then(all => res.json(all))
-    // console.log("here ia m")
-    // console.log(req.headers)
-    // console.log(req.cookies)
+exports.getMyPosts =async (req, res) => {
     try {
         await req.user
           .populate({
@@ -36,6 +32,20 @@ exports.getAllPosts =async (req, res) => {
         res.status(400).json({ error: error.message });
       }
 }
+
+// exports.getAllPosts =async (req, res) => {
+//     try {
+//         await req.user
+//           .populate({
+//             path: 'posts'
+//           })
+//           .execPopulate();
+//         res.status(200).json(req.user.posts);
+//       } catch (error) {
+//           console.log(error)
+//         res.status(400).json({ error: error.message });
+//       }
+// }
 
 exports.getSinglePost = async (req, res) => {
     let newOb = mongoose.Types.ObjectId(req.params.id)
@@ -76,6 +86,8 @@ exports.updatePost = async (req, res) => {
 }
 
 exports.deletePost = async (req, res) => {
+    console.log(req.params.id)
+    console.log(typeof req.params.id)
     await Post.findByIdAndDelete(req.params.id)
     res.json("Your post have been deleted")
 }

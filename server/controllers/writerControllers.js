@@ -1,4 +1,5 @@
-const Writer = require('../db/models/writerModel')
+const Writer = require('../db/models/writerModel'),
+cloudinary = require('cloudinary').v2
 
 //***********************************************
 // WRITER CRUD FUNCTIONS BELOW 
@@ -25,52 +26,61 @@ exports.getSingleWriter = async (req, res) => {
     try {
         console.log(req.params.id);
         let user = await Writer.findById(req.params.id);
-        res.json(user);
+        await user
+          .populate({
+            path: 'posts'
+          })
+          .execPopulate();
+          let posts = user.posts
+        res.json({user, posts});
     } catch (error) {
         res.status(500).json('Error: ' + err);
     }
 }
 
 exports.getCurrentWriter = async (req, res) => {
-  console.log("got me")
-  // console.log(req.user)
     res.json(req.user);
   };
 
 exports.updateWriter = async (req, res) => {
-    const updates = Object.keys(req.body);
+    if (req.files) {uploadAvatar(req)}
+    let obj = JSON.parse(req.body.body)
+    if (obj){
+    const updates = Object.keys(obj);
     const allowedUpdates = ['firstName', 'lastName', 'email', 'password', 'avatar'];
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
     );
+    console.log('I made it past valid')
     if (!isValidOperation)
       return res.status(400).json({ message: 'Invalid updates' });
     try {
-      updates.forEach((update) => (req.user[update] = req.body[update]));
+      updates.forEach((update) => (req.user[update] = obj[update]));
       await req.user.save();
       res.json(req.user);
     } catch (error) {
+      console.log(error)
       res.status(400).json({ error: error.message });
     }
+  }
 }
 
-exports.uploadAvatar = async (req, res) => {
+const uploadAvatar = async (req, res) => {
     try {
       const response = await cloudinary.uploader.upload(
         req.files.avatar.tempFilePath
       );
       req.user.avatar = response.secure_url;
       await req.user.save();
-      res.json(response);
+      return(req.user).avatar
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      console.log(error)
     }
   };
 
 exports.deleteWriter = async (req, res) => {
     try {
         await req.user.remove();
-        // sendCancellationEmail(req.user.email, req.user.name);
         res.clearCookie('jwt');
         res.json({ message: 'user deleted' });
       } catch (error) {
@@ -124,51 +134,3 @@ exports.logoutAllDevices = async (req, res) => {
     }
   };
 
-//***********************************************
-// PASSWORD RESETS AND UPDATES 
-//***********************************************
-
-exports.requestPasswordReset = async (req, res) => {
-    try {
-        const { email } = req.query;
-        const user = await Writer.findOne({ email });
-        if (!user) throw new Error('Writer not found');
-        const token = jwt.sign(
-        { _id: user._id.toString(), name: user.name },
-        process.env.JWT_SECRET,
-        { expiresIn: '10m' }
-        );
-        // forgotPasswordEmail(email, token);
-        res.json({ message: 'reset password email sent!' });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-
-exports.passwordRedirect = async (req, res) => {
-    const { token } = req.params;
-    try {
-        jwt.verify(token, process.env.JWT_SECRET, function (err) {
-        if (err) throw new Error(err.message);
-        });
-        res.cookie('jwt', token, {
-        httpOnly: true,
-        maxAge: 600000,
-        sameSite: 'Strict'
-        });
-        res.redirect(process.env.URL + '/update-password');
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-
-exports.updatePassword = async (req, res) => {
-    try {
-      req.user.password = req.body.password;
-      await req.user.save();
-      res.clearCookie('jwt');
-      res.status(200).json({ message: 'password updated successfully!' });
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  };

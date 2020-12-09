@@ -1,20 +1,35 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Popover, Pane, Text, Button, IconButton, MenuIcon, Card} from 'evergreen-ui'
+import React, {useState, useContext} from 'react'
+import { AppContext } from '../context/AppContext';
+import axios from 'axios'
+import {Link, useHistory} from 'react-router-dom'
+import {Popover, Pane, Text, Button, IconButton, MenuIcon, Card, LinkIcon} from 'evergreen-ui'
 
 const NavPopOver = () => {
+    const { setCurrentUser} = useContext(AppContext);
+    const history = useHistory()
+
+    const logOut = async () => {
+        try {
+            let response = await axios.post('/api/logout', {withCredentials: true})
+            sessionStorage.removeItem('user')
+            setCurrentUser(null)
+            history.push('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Popover 
         content={
             <Pane
             width={240}
-            height={205}
+            height={250}
             display="flex"
             // alignItems="center"
             // justifyContent="center"
             flexDirection="column"
             >
-            {/* <Text>PopoverContent</Text> */}
             <Card
                 backgroundColor="white"
                 elevation={0}
@@ -22,7 +37,7 @@ const NavPopOver = () => {
                 flexDirection="column"
                 padding={15}
             > 
-            <Link to={'/me/profile'}> Profile </Link>
+            <Button is={Link} appearance="minimal" to={'/me/profile'}> Profile </Button>
             </Card>
             <Card
                 backgroundColor="white"
@@ -31,7 +46,7 @@ const NavPopOver = () => {
                 flexDirection="column"
                 padding={15}
             > 
-            <Link to={'/me/posts'}> Posts </Link>
+            <Button is={Link} appearance="minimal" to={'/me/posts'}> Posts </Button>
             </Card>
             <Card
                 backgroundColor="white"
@@ -40,7 +55,7 @@ const NavPopOver = () => {
                 flexDirection="column"
                 padding={15}
             > 
-            <Link to={'/'}> Dashboard </Link>
+            <Button is={Link} appearance="minimal" to={'/'} > Search </Button>
             </Card>
             <Card
                 backgroundColor="white"
@@ -49,7 +64,7 @@ const NavPopOver = () => {
                 flexDirection="column"
                 padding={15}
             > 
-            <Text> Logout </Text>
+            <Button intent="danger" appearance="minimal" onClick={logOut}> Logout </Button>
             </Card>
             </Pane>
         }

@@ -6,6 +6,12 @@ import {Popover, Pane, Avatar, Heading,Text, TextInputField, FilePicker, Button,
 const EditProfile = ({history}) => {
   const [updateData, setUpdateData] = useState(null)
   const { currentUser, setCurrentUser } = useContext(AppContext);
+  const [image, setImage] = useState(null)
+
+  const handleImageSelect = (e) => {
+    console.log(e[0])
+    setImage(e[0])
+  }
 
   const handleChange = (e) => {
     setUpdateData({ ...updateData, [e.target.id]: e.target.value });
@@ -14,16 +20,32 @@ const EditProfile = ({history}) => {
   const handleClick = async (e) => {
     const form = e.target
     // e.preventDefault();
+    const allData = new FormData()
+    allData.append('body', JSON.stringify(updateData))
+    if (image) {
+      console.log("I AM GERE")
+      allData.append('avatar', image, image.name)
+    }
     try {
-      let response = await axios.post('/api/me',updateData, {withCredentials: true})
+      const response = await axios({
+        method: 'POST',
+        url: '/api/me',
+        data: allData,
+        headers: {
+          withCredentials: true,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(response.data)
       setCurrentUser(response.data)
       setUpdateData(null)
       form.reset()
-      // history.push('/me/profile')
+      history.push('/me/profile')
     } catch (error) {
-
+      console.log(error)
     }
 }
+
     return (
         <Popover
   content={
@@ -54,7 +76,7 @@ const EditProfile = ({history}) => {
     <FilePicker
         width={100}
         // marginBottom={32}
-        onChange={files => console.log(files)}
+        onChange={(e)=> handleImageSelect(e)}
         placeholder="Select the file here!"
     />
     <Button marginTop={5} width={80} type='Submit'> Submit </Button>

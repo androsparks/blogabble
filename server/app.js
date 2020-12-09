@@ -7,7 +7,8 @@ const app = express(),
  passport = require('./middleware/authentication/index'),
  openRoutes = require('./routes/open/generalRoute'),
  postRoutes = require('./routes/secure/postsRoute'),
- writerRoutes = require('./routes/secure/writerRoute');
+ writerRoutes = require('./routes/secure/writerRoute'),
+ fileUpload = require('express-fileupload')
 
 app.use(express.json());
 
@@ -19,6 +20,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 //MIDDLEWARE
 app.use(cookieParser());
+
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/images'
+})
+)
 
 app.use('/api/*', passport.authenticate('jwt', { session: false }));
 

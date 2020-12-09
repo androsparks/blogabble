@@ -6,7 +6,7 @@ import {Pane, Small, Button, IconButton, EyeOpenIcon} from 'evergreen-ui'
 import { AppContext } from '../../../context/AppContext';
 
 const PostManager = () => {
-    const { currentUser, setCurrentUser } = useContext(AppContext);
+    const { loading, setLoading } = useContext(AppContext);
     const [posts, setPosts] = useState("")
     const getMyPosts = async () => {
         try {
@@ -18,12 +18,19 @@ const PostManager = () => {
         }
     }
 
-    //add button to "view" as poster 
-    //so link to post/:id
+    const deletePost = async (postID) => {
+        try {
+            let response = await axios.delete(`/api/posts/${postID}`, { withCredentials: true })
+            setLoading(!loading)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     useEffect(() => {
         getMyPosts()
-    }, [])
+    }, [loading])
 
     return (
         <main className="post-manager-holder">
@@ -45,7 +52,7 @@ const PostManager = () => {
                 <h3 className="card-date mS"> {post.updatedAt} </h3>
                 <Link to={`/post/${post._id}`}> <IconButton className="mS" icon={EyeOpenIcon} /> </Link>
                 <Link to={`/me/update/${post._id}`}> <Button className="mS"> UPDATE </Button> </Link>
-                <Button className="mS"> DELETE </Button>
+                <Button className="mS" onClick={()=> deletePost(post._id)}> DELETE </Button>
                 </div>
                 </Pane>
             })}

@@ -21,11 +21,11 @@ function App() {
       <NavigationBar />
        <Switch>
          <Route exact path="/" component={Home}/>
-         <Route exact path="/profile/:id" />
+         {/* <Route exact path="/profile/:id" /> */}
          <Route exact path="/SignUp" component={SignUp}/>
          <Route exact path="/login" component={Login}/>
          <Route exact path="/post/:id" component={Post} />
-         <Route exact path="/profile" component={Profile}/>
+         <Route exact path="/profile/:id" component={Profile}/>
          {/* <Route exact path ="/posts"/> */}
          {/* //eveyrone can get posts */}
          {/* post page will be the same but some Private route will have edit buttons, same with profiles  */}

@@ -1,11 +1,10 @@
 const router = require('express').Router(),
 {
-    createWriter, requestPasswordReset, passwordRedirect, loginWriter
+    createWriter, loginWriter, getSingleWriter
 } = require('../../controllers/writerControllers'),
-{ getSinglePost, getAllPosts } = require('../../controllers/postControllers'),
+{ getSinglePost} = require('../../controllers/postControllers'),
 {getAllComments, createComment} = require('../../controllers/commentsControllers'),
- Writer = require('../../db/models/writerModel'),
- Post = require('../../db/models/postModel')
+{ searchSite} = require('../../controllers/searchControllers')
 
 
 //*************************************** 
@@ -14,9 +13,7 @@ const router = require('express').Router(),
 
 router.post('/api', createWriter);
 router.post('/api/login', loginWriter);
-router.get('/password', requestPasswordReset);
-router.get('/password/:token', passwordRedirect);
-
+router.get('/api/writer/:id', getSingleWriter)
 
 //*************************************** 
 // GENERAL POST ROUTES 
@@ -36,19 +33,6 @@ router.post('/api/comments/post/:id', createComment)
 // GENERAL SEARCH ROUTES
 //*************************************** 
 
-router.get('/api/search', async (req,res)=>{
-    const theQuerey = req.query.looking
-    const {search} = req.query
-    console.log(theQuerey, search)
-    if (theQuerey === 'User') {
-        //need to import writer
-        let writer = await Writer.find({$or: [ {firstName: search}, {lastName: search}]})
-        //{ $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } 
-        res.json(writer)
-    } else if (theQuerey === 'Post' ) {
-        let posts = await Post.find({body: {$regex: search}})
-        res.json(posts)
-    }
-})
+router.get('/api/search', searchSite )
 
 module.exports = router;

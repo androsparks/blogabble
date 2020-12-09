@@ -9,18 +9,12 @@ const ToolBar = (props) => {
         display="flex"
         alignItems="center"
         >
-            <IconButton appearance="minimal" icon={HeartIcon} iconSize={15} />
-            <Text marginRight={12}> 100 </Text>
+            {/* Will return to flesh out this feature */}
+            {/* <IconButton appearance="minimal" icon={HeartIcon} iconSize={15} /> */}
+            {/* <Text marginRight={12}> 100 </Text> */}
             <IconButton appearance="minimal" icon={CommentIcon} iconSize={15} onClick={props.onClick} />
-            <Text marginRight={5}> 100 </Text>
-            {/* <HeartIcon marginRight={5} /> <Text marginRight={12}> 100 </Text>
-            <CommentIcon marginRight={5} /> <Text> 100 </Text> */}
+            <Text marginRight={5}> - Write a comment here</Text>
         </Pane>
-        {/* <TextareaField
-            label="Default textarea field"
-            description="This is a description."
-            placeholder="Placeholder text"
-        /> */}
         </>
     )
 }

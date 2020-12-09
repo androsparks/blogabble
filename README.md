@@ -3,12 +3,15 @@
 This is a simple application that allows writers to create an account and post blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
 
 ![Profile](./Images/ProfileImage.png)
+![Search](./Images/Search.png)
+![Login](./WelcomeBack.png)
 
 
 ## How was it built?
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app) and Express. 
 
+The front end used [Evergreen UI](https://evergreen.segment.com)
 
 ### Set up
 Once you clone and cd into this repo, in the project directory:

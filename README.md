@@ -2,9 +2,9 @@
 
 This is a simple application that allows writers to create an account and post blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
 
-![Profile](./Images/ProfileImage.png)
-![Search](./Images/Search.png)
-![Login](./Images/WelcomeBack.png)
+![Profile](./Images/ProfileImage.png=100x75)
+![Search](./Images/Search.png=100x75)
+![Login](./Images/WelcomeBack.png=100x75)
 
 
 ## How was it built?

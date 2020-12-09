@@ -5,6 +5,7 @@ cloudinary = require('cloudinary').v2
 // WRITER CRUD FUNCTIONS BELOW 
 //***********************************************
 exports.createWriter = async (req, res) => {
+  console.log(req.body)
   Writer.create(req.body, async (err, user) => {
       if (err) {
         console.log(err);

@@ -2,6 +2,8 @@
 
 This is a simple application that allows writers to create an account and post blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
 
+![Profile](./Images/ProfileImage.png)
+
 
 ## How was it built?
 
@@ -20,12 +22,6 @@ Once you clone and cd into this repo, in the project directory:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 ### Dependencies
 
 | BackEnd             | FrontEnd           |
@@ -42,4 +38,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 | passport-jwt        |
 | validator           |
 
- 
+## In the Future
+
+- Add Comment Counter
+- Flesh out front end desgin 
+- Add loaders 
+- Add shadows to elevate cards 

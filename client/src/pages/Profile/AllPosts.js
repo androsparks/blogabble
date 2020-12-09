@@ -5,24 +5,24 @@ import axios from 'axios'
 import { AppContext } from '../../context/AppContext';
 import {Card, Paragraph, Small} from 'evergreen-ui'
 
-const Home = () => {
-    const { currentUser, setCurrentUser } = useContext(AppContext);
-    const [posts, setPosts] = useState("")
+const AllPosts= (props) => {
+    // const { currentUser, setCurrentUser } = useContext(AppContext);
+    const [posts, setPosts] = useState(props.posts)
     //set array equalt to sate and map thorhg 
     //perhaps do a new contoller that is a genral get posts 
     //not req.user but compares users to 
-    const getMyPosts = async () => {
-        try {
-            let response = await axios.get('/api/posts', { withCredentials: true })
-            console.log(response.data)
-            setPosts(response.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // const getMyPosts = async () => {
+    //     try {
+    //         let response = await axios.get('/api/posts', { withCredentials: true })
+    //         console.log(response.data)
+    //         setPosts(response.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     useEffect(() => {
-        getMyPosts()
+        console.log("done")
     }, [])
 
     return (
@@ -40,13 +40,12 @@ const Home = () => {
                 border="default"
                 margin={10}
                 > 
-                
                  <div className="card-header"> <h3 className="card-title"> {post.title} </h3> <span className="card-date"> {post.updatedAt} </span></div>
                 <div className="card-content"> 
                 <Paragraph className="card-body">
                     {post.body}
                 </Paragraph> 
-                <span className="card-comm"><Small> Number of Comments: </Small></span>
+                {/* <span className="card-comm"><Small> Number of Comments: </Small></span> */}
                 </div>
                 </Card>
                 </Link>
@@ -56,4 +55,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default AllPosts

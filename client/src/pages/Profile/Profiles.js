@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Pane, Avatar, Heading,Text } from 'evergreen-ui'
 import './Profile.css'
+import AllPosts from './AllPosts'
 
 const Profiles = ({match}) => {
     const [userInfo, setUserInfo] = useState("")
@@ -13,6 +14,7 @@ const Profiles = ({match}) => {
             setUserInfo(response.data.user)
             setPosts(response.data.posts)
             console.log(response.data)
+            
         } catch (error) {
             console.log(error)
         }
@@ -20,7 +22,7 @@ const Profiles = ({match}) => {
 
     useEffect(() => {
         getSingleUser()
-    }, [])
+    }, [setPosts])
 
     return (
         <main className="profile-container">
@@ -43,7 +45,8 @@ const Profiles = ({match}) => {
         width="80%"
         border="default">
             <Heading size={400} marginBottom={10} > Checkout their posts </Heading>
-            <div> POSTS HERE</div>
+            {/* <div> POSTS HERE</div> */}
+            {posts && <AllPosts posts={posts}/>}
         </Pane>
         </main>
     )

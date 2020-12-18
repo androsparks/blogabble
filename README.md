@@ -2,6 +2,10 @@
 
 This is a simple application that allows writers to create an account and post blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
 
+## Demo 
+![alt text](./images/search-480.gif "Logo Title Text 1")
+
+
 ## How was it built?
 
 This project was created with [Create React App](https://github.com/facebook/create-react-app) and Express. 

@@ -1,9 +1,14 @@
 # MERN ASSESSMENT 
 
-This is a simple application that allows writers to create an account and post blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
+This is a simple application that allows writers to create an account and post/manage their own blog entries. Readers are able to search for posts to read and comment on, or to view profiles of writers.
 
 ## Demo 
-![alt text](./images/search-480.gif "Logo Title Text 1")
+Reader Example.                      |  Writer Example
+:-----------------------------------:|:-----------------------------------:
+![alt text](./Images/search-480.gif) |  ![alt text](./Images/login-480.gif)
+
+
+
 
 
 ## How was it built?

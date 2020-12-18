@@ -46,10 +46,10 @@ Each writer will have password of '12345678'. This can be adjusted in the seed f
 | dateformat          | react              |
 | express             | react-dom          |
 | express-fileupload  | react-router-dom   |
-| faker               | faker              |
-| jsonwebtoken        | jsonwebtoken       |
-| mongoose            | react-scripts      |
-| passport            | web-vitals         |
+| faker               | react-scripts      |
+| jsonwebtoken        | web-vitals         |
+| mongoose            |     
+| passport            |        
 | passport-jwt        |
 | validator           |
 
@@ -59,3 +59,4 @@ Each writer will have password of '12345678'. This can be adjusted in the seed f
 - Flesh out front end desgin 
 - Add loaders 
 - Add shadows to elevate cards 
+- Deploy site

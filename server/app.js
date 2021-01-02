@@ -14,10 +14,6 @@ app.use(express.json());
 
 //UNAUTH ROUTES
 app.use(openRoutes)
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
 //MIDDLEWARE
 app.use(cookieParser());
 
@@ -33,12 +29,14 @@ app.use(writerRoutes)
 app.use(postRoutes)
 
 //AUTH ROUTES 
-
-
-  if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     app.get('*', (request, response) => {
       response.sendFile(path.join(__dirname, '../client/build', 'index.html'));
     });
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
   }
   
   module.exports = app;
